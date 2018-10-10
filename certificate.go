@@ -110,10 +110,12 @@ func VerifyDocumentWithCertificateChain(doc document.Document, keyLevel int) (bo
 	}
 
 	var subject *jose.JsonWebKey
+
 	signers := make([]*jose.JsonWebKey, 0)
 	certChain := doc.GetCertificate()
 	prevDoc := doc
 	prevKeyLevel := keyLevel
+	prevIssuerTP := ""
 	for {
 		cert, err := VerifyCertificate(certChain, keyLevel)
 		if err != nil {
@@ -122,6 +124,13 @@ func VerifyDocumentWithCertificateChain(doc document.Document, keyLevel int) (bo
 
 		if subject == nil {
 			subject = cert.Subject
+		}
+
+		if prevIssuerTP != "" {
+			subjectTP := Thumbprint(cert.Subject)
+			if subjectTP != prevIssuerTP {
+				return false, nil, nil, fmt.Errorf("Chain is broken, current subject is not issuer of next certificate")
+			}
 		}
 
 		signers = append(signers, cert.Issuer)
@@ -137,6 +146,7 @@ func VerifyDocumentWithCertificateChain(doc document.Document, keyLevel int) (bo
 		if prevKeyLevel == keyLevel {
 			prevKeyLevel = cert.KeyLevel
 		}
+
 		if cert.KeyLevel > prevKeyLevel {
 			return false, nil, nil, errors.New("Not possible to have parent certificate with lower keyLevel than child")
 		}
@@ -147,6 +157,7 @@ func VerifyDocumentWithCertificateChain(doc document.Document, keyLevel int) (bo
 
 		prevDoc = cert
 		prevKeyLevel = cert.KeyLevel
+		prevIssuerTP = Thumbprint(cert.Issuer)
 		certChain = cert.Certificate
 	}
 
