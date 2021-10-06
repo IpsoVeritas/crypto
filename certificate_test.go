@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	document "github.com/Brickchain/go-document.v2"
+	"github.com/IpsoVeritas/document"
 )
 
 func Test_CreateCertificate(t *testing.T) {
@@ -105,13 +105,13 @@ func Test_VerifyDocumentWithCertificateChain_LongChain(t *testing.T) {
 	prevCert := ""
 	iss := issuer
 	var err error
-	docTypes := []string{"https://schema.brickchain.com/v2/base.json", "https://schema.brickchain.com/v2/certificate.json"}
+	docTypes := []string{"https://IpsoVeritas.github.io/schemas/v0/base.json", "https://IpsoVeritas.github.io/schemas/v0/certificate.json"}
 	for i := 100; i < 110; i++ {
 		subject, _ := NewKey()
 		subPK, _ := NewPublicKey(subject)
 
 		if i == 109 {
-			docTypes = []string{"https://schema.brickchain.com/v2/base.json"}
+			docTypes = []string{"https://IpsoVeritas.github.io/schemas/v0/base.json"}
 		}
 		cert, err := CreateCertificate(iss, subPK, i, docTypes, 3600, prevCert)
 		if err != nil {
@@ -139,13 +139,13 @@ func Test_VerifyDocumentWithCertificateChain_DocTypeSubset(t *testing.T) {
 	prevCert := ""
 	iss := issuer
 	var err error
-	docTypes := []string{"https://schema.brickchain.com/v2/base.json", "https://schema.brickchain.com/v2/certificate.json"}
+	docTypes := []string{"https://IpsoVeritas.github.io/schemas/v0/base.json", "https://IpsoVeritas.github.io/schemas/v0/certificate.json"}
 	for i := 100; i < 102; i++ {
 		subject, _ := NewKey()
 		subPK, _ := NewPublicKey(subject)
 
 		if i == 101 {
-			docTypes = []string{"https://schema.brickchain.com/v2/base.json"}
+			docTypes = []string{"https://IpsoVeritas.github.io/schemas/v0/base.json"}
 		}
 		cert, err := CreateCertificate(iss, subPK, i, docTypes, 3600, prevCert)
 		if err != nil {

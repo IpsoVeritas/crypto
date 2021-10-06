@@ -5,7 +5,7 @@
 import (
     "fmt"
     "gopkg.in/square/go-jose.v1"
-    crypto "github.com/Brickchain/go-crypto.v1"
+    "github.com/IpsoVeritas/crypto"
 )
 
 func encrypt() {

@@ -10,7 +10,7 @@ import (
 
 	"fmt"
 
-	"github.com/Brickchain/go-document.v2"
+	"github.com/IpsoVeritas/document"
 )
 
 // VerifyDocumentInJWS wrapps VerifyDocumentWithCertificateChain

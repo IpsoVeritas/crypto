@@ -5,8 +5,9 @@ import (
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
-	"encoding/hex"
+	"encoding/base32"
 	"encoding/pem"
+	"strings"
 
 	hash "crypto"
 
@@ -125,8 +126,9 @@ func SignKey(signerKey *jose.JsonWebKey, key *jose.JsonWebKey) (*jose.JsonWebSig
 
 func Thumbprint(key *jose.JsonWebKey) string {
 	keyTPbytes, _ := key.Thumbprint(hash.SHA256)
-	// return base64.URLEncoding.EncodeToString(keyTPbytes)
-	return hex.EncodeToString(keyTPbytes)
+	return strings.ToLower(base32.StdEncoding.WithPadding(base32.NoPadding).EncodeToString(keyTPbytes))
+	// return base32.EncodeToString(keyTPbytes)
+	// return hex.EncodeToString(keyTPbytes)
 }
 
 func MarshalToPEM(key *jose.JsonWebKey) ([]byte, error) {

@@ -18,6 +18,15 @@ func TestNewKey(t *testing.T) {
 	fmt.Println(SignKey(key, key))
 }
 
+func TestThumbprint(t *testing.T) {
+	key, err := NewKey()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	fmt.Println(Thumbprint(key))
+}
+
 func TestUnmarshalKey(t *testing.T) {
 	_, err := UnmarshalKey(privateKeyBytes)
 	if err != nil {
