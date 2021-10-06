@@ -1,3 +1,5 @@
+github.com/IpsoVeritas/document v0.0.0-20211006175647-cd7abd7441a8 h1:goYJ4pgZuxjmzsBmLFv6WBdsPNHBXBSPlfNoD9S4rps=
+github.com/IpsoVeritas/document v0.0.0-20211006175647-cd7abd7441a8/go.mod h1:E5LK310mMtpFtsY7l5KgVYMUAt7Sl2RMtqoQdI46jtA=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
